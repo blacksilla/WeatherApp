@@ -1,0 +1,26 @@
+﻿@model Weather;
+@{
+    ViewData["Title"] = "Weather Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Queres saber o tempo? Manda aí abaixo a cidade</h1>
+    <br/>
+    <div>
+        @using (Html.BeginForm("WeatherApiForm", "Home", FormMethod.Post))
+        {
+            <table class="table table-bordered table-hover table-striped table-responsive">
+                <tr>
+                    <td>Location Name:</td>
+                    <td>@Html.TextBoxFor(cw => cw.locationName, new {@class="form-control"})</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button type="submit" class="btn btn-primary">Quero saber já!</button>
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+
+</div>
