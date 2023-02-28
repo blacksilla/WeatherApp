@@ -6,7 +6,13 @@
     <h1 class="display-4">Toma aí os resultados</h1>
     <br/>
     <div>
-        @Html.Raw(ViewBag.Weather)
+       <ul>
+    @foreach (var element in ViewBag.output)
+    {
+        <li>@element</li>
+    }
+</ul>
     </div>
+   
 
 </div>

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Diagnostics;
 using WeatherApp.Models;
 
@@ -42,10 +43,22 @@ namespace WeatherApp.Controllers
             response.EnsureSuccessStatusCode();
                 //lança um erro
             var body = await response.Content.ReadAsStringAsync();
+            dynamic weather = JsonConvert.DeserializeObject(body);
 
-            ViewBag.Weather = body;
+            List<string> results = new List<string>();
+            foreach (var day in weather.days)
+            {
+                results.Add("Forecast for date: "+ day.datetime);
+                results.Add("General conditions will be: " + day.description);
+                results.Add(" ");
 
-            return View("Results");
+
+
+            }
+
+            ViewBag.output = results;
+
+            return View("Results",cw);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
